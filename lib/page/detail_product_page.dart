@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 import '../model/cart.dart';
 import '../model/product.dart';
 
@@ -30,17 +29,36 @@ class DetailProductPage extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
+            child: Column(
               children: [
-                Expanded(
-                  child: Text(
-                    product.title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Row(
+                  children: [
+                    ...List.generate(5, (index) {
+                      return Icon(
+                        index < product.rating ? Icons.star : Icons.star_border,
+                        color: Colors.orange,
+                        size: 20,
+                      );
+                    }),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text("${product.rating}/5"),
+                    ),
+                  ],
                 ),
-                Text(product.getPrice()),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        product.title,
+                        style: Theme.of(context).textTheme.titleLarge,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(product.getPrice()),
+                  ],
+                ),
               ],
             ),
           ),
@@ -53,7 +71,7 @@ class DetailProductPage extends ConsumerWidget {
             child: Text(product.category),
           ),
           Spacer(),
-          if (ref.watch(cartProvider).contains(product))
+          if (ref.watch(cartProvider).any((p) => p.id == product.id))
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Chip(
