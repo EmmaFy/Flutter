@@ -4,16 +4,17 @@ import 'package:esilv_shop/page/cart_page.dart';
 import 'package:esilv_shop/page/detail_product_page.dart';
 import 'package:esilv_shop/page/list_product_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 
 import 'model/product.dart';
 
-class EsilvShop extends StatelessWidget {
+class EsilvShop extends ConsumerWidget {
   const EsilvShop({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       title: 'Esilv Shop',
       theme: ThemeData(
