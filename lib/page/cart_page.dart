@@ -12,7 +12,7 @@ class CartPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Shop'),
+        title: const Text('Panier'),
       ),
       body: Column(
         children: [
@@ -61,6 +61,17 @@ class CartPage extends ConsumerWidget {
                 ),
               ),
             ),
+          if (ref.watch(cartProvider).isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: FilledButton(
+                onPressed: () {},
+                child: Text("Procéder au paiement"),
+              ),
+            ),
+          ),
         ],
       ),
     );
